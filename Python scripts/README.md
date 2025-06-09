@@ -5,33 +5,33 @@ Táto časť repozitára obsahuje vytvorené ovládače **Controllers** pre robo
 ## Potrebné knižnice
 
 Controllers:
-    - math
-    - numpy
-    - os
-    - pyrealsense2
-    - serial
-    - time
+- math
+- numpy
+- os
+- pyrealsense2
+- serial
+- time
 
 Position_generator:
-    - math
-    - os
-    - PIL
-    - time
+- math
+- os
+- PIL
+- time
 
 Face_tracker:
-    - cv2
+- cv2
 
 Dino_recognition:
-    - cv2
-    - numpy
-    - onnxruntime
-    - os
-    - requests
+- cv2
+- numpy
+- onnxruntime
+- os
+- requests
 
 Distances_filter:
-    - cv2
-    - numpy
-    - time
+- cv2
+- numpy
+- time
 
 ## Problém inštalácie pyrealsense2
 
@@ -42,8 +42,8 @@ Pri inštalovaní knižnice pyrealsense2 sme narazili na problém, ktorý spomal
 
 Ovládače sa importujú zo zložky **Controllers**, pričom stačí použiť len FaceController a RealSenseCamera, zvyšné časti sú poprepájané. Nastavenia a preferencie je možné meniť v **Controllers/config.py**.
 ```
-> from Controllers.face_controller import FaceController 
-> from Controllers.realsense_camera import RealSenseCamera
+from Controllers.face_controller import FaceController 
+from Controllers.realsense_camera import RealSenseCamera
 ```
 
 ## Generátor emócií
