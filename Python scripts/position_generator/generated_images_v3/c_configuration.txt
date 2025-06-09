@@ -1,0 +1,7 @@
+head_image=normal.jpg
+Point 1: x=445, y=780, left_length=40, right_length=40
+Point 2: x=555, y=780, left_length=40, right_length=40
+Point 3: x=445, y=825, left_length=40, right_length=40
+Point 4: x=555, y=825, left_length=40, right_length=40
+Point 5: x=350, y=430, left_length=100, right_length=75
+Point 6: x=650, y=430, left_length=75, right_length=100
