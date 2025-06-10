@@ -17,11 +17,11 @@ Predom sme definovali iba základné emócie. Ak má užívateľ vlastné prefer
 
 1. V **Emotions.cpp** vytvoríme nové pole pomenované podľa emócie a definujeme jednotlivé kroky emócie - {načasovanie, natočenia motorčekov}
 2. V tom istom súbore pridáme do funkcie void Emotions::initialize() nové definície emócie:
-    emotionMap[emotionCount].name = "NOVÁ EMÓCIA";
-    emotionMap[emotionCount].data = nova_emocia;
-    emotionMap[emotionCount++].steps = nova_emocia_steps;
-3. Do súboru **Emotions.h** zapíšeme novú premennú *extern int nova_emocia[][nova_emocia_steps]*;
-4. Zvýšime počítadlo *#define EMOTIONS_COUNT i+1*
+- emotionMap[emotionCount].name = "NOVÁ EMÓCIA";
+- emotionMap[emotionCount].data = nova_emocia;
+- emotionMap[emotionCount++].steps = nova_emocia_steps;
+3. Do súboru **Emotions.h** zapíšeme novú premennú - *extern int nova_emocia[][nova_emocia_steps]*;
+4. Zvýšime počítadlo o +1 - *#define EMOTIONS_COUNT i+1*
 5. Upravený kód nahráme do mikrokontroléra
 
 Tento postup je zdĺhavý, preto ak nastane ďalšie rozširovanie práce, pridávanie vlastných emócií sa zlepší.
