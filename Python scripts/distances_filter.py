@@ -5,7 +5,7 @@ from Controllers.realsense_camera import RealSenseCamera
 from Controllers.face_controller import FaceController
 
 class DistancesFilter:
-    def __init__(self, depth_interval=0.05):
+    def __init__(self, depth_interval=0.08):
         self.camera = RealSenseCamera()
         self.face = FaceController()
         self.depth_interval = depth_interval
@@ -13,7 +13,7 @@ class DistancesFilter:
         self.last_best = None
         self.last_mask = None
 
-    def find_smallest_distance(self, depth_frame, tolerance=0.02):
+    def find_smallest_distance(self, depth_frame, tolerance=0.01):
         depth = np.asanyarray(depth_frame.get_data())
         if depth.dtype != np.float32:
             depth = depth.astype(np.float32)

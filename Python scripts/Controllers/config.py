@@ -1,6 +1,6 @@
 # Konfiguracia pre preferovane porty
 PREFFERED_PORT = "COM14"
-LAST_CONNECTED_PORT = "COM14"
+LAST_CONNECTED_PORT = "COM21"
 
 # Nastavenia kamery
 CAMERA_DIMENSIONS = (640, 480)
@@ -11,8 +11,8 @@ DEPTH_CAMERA_KERNEL_SIZE = 5
 
 # Globalne nastavenia
 MM_TO_PIXEL = 3.7795275591
-DIFFERENCE_EYES = (-43, 43) # (Left, Right) in mm
-DIFFERENCE_HEAD = (0, -215, 65) # (dx, dy, dz) in mm
+DIFFERENCE_EYES = (-30, 30) # (Left, Right) in mm
+DIFFERENCE_HEAD = (35, -142, 0) # (dx, dy, dz) in mm
 EYE_LIMIT_HORIZONTAL = 30
 EYE_LIMIT_VERTICAL = 40
 EYE_LIMIT_LID = 50

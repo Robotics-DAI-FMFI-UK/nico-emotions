@@ -10,7 +10,7 @@ class RealSenseCamera:
         self.config.enable_stream(rs.stream.color, self.dimensions[0], self.dimensions[1], rs.format.bgr8, RGB_CAMERA_FPS)
         self.config.enable_stream(rs.stream.depth, self.dimensions[0], self.dimensions[1], rs.format.z16, DEPTH_CAMERA_FPS)
         self.align = rs.align(rs.stream.color)
-
+                
         self.filters = [
             rs.hole_filling_filter(2),
             # rs.hdr_merge(),
