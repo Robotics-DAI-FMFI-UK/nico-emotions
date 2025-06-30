@@ -37,8 +37,10 @@ Distances_filter:
 - time
 
 Všetky si je možné nainštalovať naraz príkazom:
-`{python} -m pip install numpy pyrealsense2==2.54.2.5684 serial requests pillow opencv-python onnxruntime`
-V príkaze prosím `{python}` nahraďte adekvátnou verziou napr. python3.11 alebo len python
+```
+python -m pip install numpy pyrealsense2==2.54.2.5684 serial requests pillow opencv-python onnxruntime
+```
+V prípade, že máte viacero verzií pythonu, v príkaze prosím `python` nahraďte adekvátnou verziou napr. `python3.11`. 
 
 ## Problém inštalácie pyrealsense2
 
