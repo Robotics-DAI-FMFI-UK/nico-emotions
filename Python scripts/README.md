@@ -1,6 +1,8 @@
 # Python programy
 
-Táto časť repozitára obsahuje vytvorené ovládače **Controllers** pre robotickú tvár, interaktívny generátor variácií emócií **position_generator** a konkrétne príklady využitia ovládačov (**face_tracker**, **dino_recognition**, **distances_filter**).   
+Táto časť repozitára obsahuje vytvorené ovládače **Controllers** pre robotickú tvár, interaktívny generátor variácií emócií **position_generator**, GUI pre emócie a konkrétne príklady využitia ovládačov (**face_tracker**, **dino_recognition**, **distances_filter**).   
+
+### Maximálna verzia Python 3.11
 
 ## Potrebné knižnice
 
@@ -11,31 +13,38 @@ Controllers:
 - pyrealsense2
 - serial
 - time
+- requests
 
 Position_generator:
 - math
 - os
-- PIL
+- pillow
 - time
 
 Face_tracker:
-- cv2
+- opencv-python
 
 Dino_recognition:
-- cv2
+- opencv-python
 - numpy
 - onnxruntime
 - os
 - requests
 
 Distances_filter:
-- cv2
+- opencv-python
 - numpy
 - time
 
+Všetky si je možné nainštalovať naraz príkazom:
+```
+python -m pip install numpy pyrealsense2==2.54.2.5684 serial requests pillow opencv-python onnxruntime
+```
+V prípade, že máte viacero verzií pythonu, v príkaze prosím `python` nahraďte adekvátnou verziou napr. `python3.11`. 
+
 ## Problém inštalácie pyrealsense2
 
-Pri inštalovaní knižnice pyrealsense2 sme narazili na problém, ktorý spomalil náš postup. Jednalo sa o chybu: "RuntimeError: failed to convert special folder: errno=42". Po dlhom pátraní sme sa dočítali, že je to chyba verzie a preto odporúčame použiť staršiu verziu - `pip install pyrealsense2==2.54.2.5684.`.
+Pri inštalovaní knižnice pyrealsense2 sme narazili na problém, ktorý spomalil náš postup. Jednalo sa o chybu: "RuntimeError: failed to convert special folder: errno=42". Po dlhom pátraní sme sa dočítali, že je to chyba verzie a preto odporúčame použiť staršiu verziu - `pip install pyrealsense2==2.54.2.5684`.
 
 
 ## Použitie ovládačov

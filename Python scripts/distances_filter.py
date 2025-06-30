@@ -5,28 +5,33 @@ from Controllers.realsense_camera import RealSenseCamera
 from Controllers.face_controller import FaceController
 
 class DistancesFilter:
-    def __init__(self, depth_interval=0.05):
+    def __init__(self, depth_interval=0.01, pixel_step=3):
         self.camera = RealSenseCamera()
         self.face = FaceController()
         self.depth_interval = depth_interval
+        self.pixel_step = pixel_step
         self.last_depth_time = 0
         self.last_best = None
         self.last_mask = None
 
-    def find_smallest_distance(self, depth_frame, tolerance=0.02):
+    def find_smallest_distance(self, depth_frame, tolerance=0.05):
         depth = np.asanyarray(depth_frame.get_data())
         if depth.dtype != np.float32:
             depth = depth.astype(np.float32)
         depth = depth / 1000.0
 
+        h, w = depth.shape
+        step = self.pixel_step
         valid_mask = (depth > 0.15)
-        if not np.any(valid_mask):
+        step_mask = np.zeros_like(valid_mask, dtype=bool)
+        step_mask[::step, ::step] = True
+        combined_mask = valid_mask & step_mask
+        if not np.any(combined_mask):
             return None, np.zeros_like(depth, dtype=np.uint8)
 
-        min_dist = np.min(depth[valid_mask])
-        min_mask = (depth == min_dist) & valid_mask
+        min_dist = np.min(depth[combined_mask])
+        min_mask = (depth == min_dist) & combined_mask
         coords = np.column_stack(np.where(min_mask))
-        h, w = depth.shape
         center = np.array([h // 2, w // 2])
         dists_to_center = np.linalg.norm(coords - center, axis=1)
         idx = np.argmin(dists_to_center)
@@ -39,15 +44,12 @@ class DistancesFilter:
 
         while to_visit:
             y, x = to_visit.pop()
-            for dy in [-1, 0, 1]:
-                for dx in [-1, 0, 1]:
-                    if dy == 0 and dx == 0:
-                        continue
-                    ny, nx = y + dy, x + dx
-                    if 0 <= ny < h and 0 <= nx < w and not grown_mask[ny, nx] and valid_mask[ny, nx]:
-                        if abs(depth[ny, nx] - d0) <= tolerance:
-                            grown_mask[ny, nx] = True
-                            to_visit.append((ny, nx))
+            for dy, dx in [(-1, 0), (1, 0), (0, -1), (0, 1)]:  # len hore, dole, vľavo, vpravo
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < h and 0 <= nx < w and not grown_mask[ny, nx] and valid_mask[ny, nx]:
+                    if abs(depth[ny, nx] - d0) <= tolerance:
+                        grown_mask[ny, nx] = True
+                        to_visit.append((ny, nx))
 
         region_coords = np.column_stack(np.where(grown_mask))
 

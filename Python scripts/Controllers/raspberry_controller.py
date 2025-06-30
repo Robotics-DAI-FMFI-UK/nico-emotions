@@ -57,6 +57,45 @@ class RaspberryController:
             return self.left_eye_state[2]
         elif eye == self.right_eye:
             return self.right_eye_state[2]
+        
+    def get_emotions(self):
+        self.send_command("GET:EMOTIONS")
+        time.sleep(0.1)
+        start_time = time.time()
+        timeout = 2
+
+        while True:
+            if self.ser.in_waiting == 0 and (time.time() - start_time) > timeout:
+                return []
+            
+            if self.ser.in_waiting > 0:
+                response = self.ser.readline().decode('utf-8').strip()
+                
+                if response.startswith("EMOTIONS: "):
+                    emotions_str = response[len("EMOTIONS: "):]
+                    return [e.strip() for e in emotions_str.split(',') if e.strip()] 
+    
+    def execute_emotion(self, emotion):
+        emotions = self.get_emotions()
+        if emotion in emotions:
+            self.send_command(f"EMOTION:{emotion}")
+        else:
+            print(f"Emotion '{emotion}' not recognized.")
+
+    def stop_emotion(self):
+        self.send_command("STOP_EMOTION")
+
+    def get_temperature(self):
+        self.send_command("GET:TEMPERATURES")
+        time.sleep(0.1)
+        response = self.ser.readline().decode('utf-8').strip()
+        return float(response)
+    
+    def get_battery_voltage(self):
+        self.send_command("GET:BATTERY_VOLTAGE")
+        time.sleep(0.1)
+        response = self.ser.readline().decode('utf-8').strip()
+        return float(response)
 
     def close_connection(self):
         self.ser.close()
