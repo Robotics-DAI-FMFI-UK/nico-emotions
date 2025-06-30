@@ -1,4 +1,4 @@
-from math import degrees, atan2
+from math import degrees, atan2, sqrt
 from numpy import matmul
 from Controllers.config import MM_TO_PIXEL, EYE_LIMIT_HORIZONTAL, EYE_LIMIT_VERTICAL, DIFFERENCE_EYES, DIFFERENCE_HEAD
 
@@ -43,14 +43,15 @@ class EyesController:
         x, _, d, _ = point
 
         new_degree = degrees(atan2(x, d))
+
         new_degree = max(-self.LIMIT_HORIZONTAL, min(self.LIMIT_HORIZONTAL, new_degree))
 
         return int(new_degree)
 
     def calculate_vertical_degree(self, point):
-        _, y, d, _ = point
+        x, y, d, _ = point
 
-        new_degree = degrees(atan2(y, d))
+        new_degree = degrees(atan2(y, sqrt(x**2 + d**2)))
         new_degree = max(-self.LIMIT_VERTICAL, min(self.LIMIT_VERTICAL, new_degree))
 
         return int(new_degree)
